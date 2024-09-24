@@ -1,0 +1,46 @@
+name "Phyto Thingy"
+
+-- Powahhh
+every 1 ticks do
+    input fe:: from cube top side
+    output fe:: to all_phytos
+end
+
+
+--- STUFF FOR ALL PHYTOS ---
+every 20 ticks do 
+    -- Waduhhhh for em phyntos
+    input fluid:minecraft:water from sink
+    output fluid:: to each all_phytos
+    forget
+
+    -- Phyto-Gro cause dats the best fertilizer
+    input item:thermal:phytogro from fertilizer
+    output to each all_phytos slots 1
+    forget
+
+    -- Output all NON-SEEDS to out
+    input except item:mystical_agriculture:*seeds from all_phytos slots 2-5
+    output to out
+    forget
+end
+
+-- SEEDSSSSSS TIMEEEE --
+every redstone pulse do
+
+    --- TO ADD A NEW GROUP: ---
+    --- Copy paste the last group at the end and then increment the number after "phyto".
+    ---  You could also just replace "phyto[NUMBER]" with some other unique name, for example the seed it is growing.
+
+    -- Group 1 --
+    input item:mystical_agriculture:*seeds from phyto1 slots 2-5
+    output retain 2 to each phyto1 slots 0
+    forget
+
+
+    --- Outputting the extra seeds should be the last thing, --
+    ---  AFTER any groups. --
+    input item:mystical_agriculture:*seeds from all_phytos slots 2-5
+    output to trash top side
+    forget
+end
