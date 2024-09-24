@@ -1,14 +1,14 @@
 name "Phyto Thingy"
 
 -- Powahhh
-every 1 ticks do
+every 2 ticks do
     input fe:: from cube top side
     output fe:: to all_phytos
 end
 
 
 --- STUFF FOR ALL PHYTOS ---
-every 20 ticks do 
+every 100 ticks do 
     -- Waduhhhh for em phyntos
     input fluid:minecraft:water from sink
     output fluid:: to each all_phytos
