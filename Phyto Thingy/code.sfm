@@ -20,7 +20,7 @@ every 20 ticks do
     forget
 
     -- Output all NON-SEEDS to out
-    input except item:mystical_agriculture:*seeds from all_phytos slots 2-5
+    input except item:mysticalagriculture:*seeds from all_phytos slots 2-5
     output to out
     forget
 end
@@ -33,14 +33,14 @@ every redstone pulse do
     ---  You could also just replace "phyto[NUMBER]" with some other unique name, for example the seed it is growing.
 
     -- Group 1 --
-    input item:mystical_agriculture:*seeds from phyto1 slots 2-5
+    input item:mysticalagriculture:*seeds from phyto1 slots 2-5
     output retain 2 to each phyto1 slots 0
     forget
 
 
     --- Outputting the extra seeds should be the last thing, --
     ---  AFTER any groups. --
-    input item:mystical_agriculture:*seeds from all_phytos slots 2-5
+    input item:mysticalagriculture:*seeds from all_phytos slots 2-5
     output to trash top side
     forget
 end
