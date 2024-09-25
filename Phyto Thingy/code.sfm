@@ -8,7 +8,7 @@ end
 
 
 --- STUFF FOR ALL PHYTOS ---
-every 100 ticks do 
+every 150 ticks do 
     -- Waduhhhh for em phyntos
     input fluid:minecraft:water from sink
     output fluid:: to each all_phytos
