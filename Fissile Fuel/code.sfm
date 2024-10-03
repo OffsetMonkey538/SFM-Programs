@@ -1,0 +1,121 @@
+name "Fwissiwle Fwel UwU"
+
+------                                                                               ------
+------           This code is for a setup where I placed the machines down           ------
+------           while facing "west", meaning that for example the default           ------
+------           settings for an Electrolytic Separator will output oxygen           ------
+------           to its north side, and hydrogen to its south side.                  ------
+------                                                                               ------
+------   THIS CODE WILL NOT FUNCTION IF THE MACHINES AREN'T PLACED IN THE SAME WAY   ------
+------                                                                               ------
+------     Don't forget to add Energy and Speed upgrades to all of the machines!     ------
+------                                                                               ------
+
+-- Powahhhhhh
+every 1 ticks do
+    input fe:: from cube top side
+    output fe:: to power bottom side
+end
+
+-- Actually the whole thing :wink:
+every redstone pulse do
+    ---- Hydroflouric Acid ----
+
+    -- Water to Electrolytic Separator for making oxygen and hydrogen
+    --  machine should be set to "Dumping Excess" on both outputs
+    input fluid:minecraft:water from sink
+    output fluid:minecraft:water to elec_separator top side
+    forget
+
+    -- Sulfur dust to Chemical Oxidizer. This makes Sulfur Dioxide
+    input sulfur_dust from sulfur_drawer
+    output sulfur_dust to sulfur_oxidizer top side
+    forget
+
+    -- Take Sulfur Dioxide from the Oxidizers and give to infusers,
+    --  one requirement for making Sulfur Trioxide
+    input gas:mekanism:sulfur_dioxide from sulfur_oxidizer north side
+    output gas:mekanism:sulfur_dioxide to trioxide_infuser north side
+    forget
+
+    -- Take Oxygen from the Electrolytic Separators and give to infusers,
+    --  second requirement for making Sulfur Trioxide
+    input gas:mekanism:oxygen from elec_separator north side
+    output gas:mekanism:oxygen to trioxide_infuser south side
+    forget
+
+    -- Take Sulfur Trioxide from those infusers and give to the next infusers,
+    --- one requirement for making Sulfuric Acid
+    input gas:mekanism:sulfur_trioxide from trioxide_infuser east side
+    output gas:mekanism:sulfur_trioxide to acid_infuser south side
+    forget
+
+    -- Water to Rotary Condenstrator for making Water Vapor.
+    --  The Rotary Condenstrator should be set to "Decondenstrating" by
+    --  pressing the "Toggle operation" button top-left
+    input fluid:minecraft:water from sink
+    output fluid:minecraft:water to condenstrator south side
+    forget
+
+    -- Take Water Vapor from Rotary Condenstrators and give to infusers,
+    -- second requirement for making Sulfuric Acid
+    input gas:mekanism:water_vapor from condenstrator south side
+    output gas:mekanism:water_vapor to acid_infuser north side
+    forget
+
+    -- Take Sulfuric Acid from infusers and give to Chemical Dissolution Chamber,
+    --  one requirement for making Hydrofluoric Acid
+    input gas:mekanism:sulfuric_acid from acid_infuser east side
+    output gas:mekanism:sulfuric_acid to each dissolution top side
+    forget
+
+    -- Fluorite Blocks to Chemical Dissolution Chamber,
+    --  second requirement for making Hydrofluoric Acid
+    input block_fluorite from fluorite_drawer
+    output block_fluorite to dissolution top side
+    forget
+    
+
+    ---- Uranium Oxide ----
+
+    -- Uranium Ingots to Enrichment Chambers for making Yellow Cake Uranium,
+    --  best would be Ultimate Enriching Factories with "Auto-sort" enabled :D
+    input uranium_ingot from uranium_drawer
+    output uranium_ingot to enrichment top side
+    forget
+
+    -- Take Yellow Cake Uranium from enrichment chambers and give to Chemical Oxidizers,
+    --  making Uranium Oxide. You'll probably want quite a bit of these machines.
+    input yellow_cake_uranium from enrichment north side
+    output yellow_cake_uranium to uranium_oxidizer top side
+    forget
+
+
+    ---- Uranium Hexafluoride ----
+
+    -- Take Hydrofluoric Acid from the Dissolution Chambers and give to Chemical Infuser,
+    --  one requirement for making Uranium Hexafluoride
+    input gas:mekanism:hydrofluoric_acid from dissolution north side
+    output gas:mekanism:hydrofluoric_acid to uranium_infuser south side
+    forget
+
+    -- Take Uranium Oxide from the Oxidizers and give to Chemical Infuser,
+    --  second requirement for making uranioum Hexafluoride
+    input gas:mekanism:uranium_oxide from uranium_oxidizer north side
+    output gas:mekanism:uranium_oxide to uranium_infuser north side
+    forget
+
+
+    ---- Fissile Fuel ----
+
+    -- Take Uranium Hecafluoride from Chemical Infusers and give to Isotopic Centrifuges
+    input gas:mekanism:uranium_hexafluoride from uranium_infuser east side
+    output gas:mekanism:uranium_hexafluoride to each centrifuge north side
+    forget
+
+    -- Take Fissile Fuel from Isotopic Centrifuges and send to output.
+    --  You probably want the output to be a Fission Reactor Port on your reactor.
+    input gas:mekanism:fissile_fuel from centrifuge east side
+    output gas:mekanism:fissile_fuel to out north side
+    forget
+end
