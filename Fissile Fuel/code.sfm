@@ -14,7 +14,7 @@ name "Fwissiwle Fwel UwU"
 -- Powahhhhhh
 every 1 ticks do
     input fe:: from cube top side
-    output fe:: to power bottom side
+    output fe:: to "!!!power" bottom side
 end
 
 -- Actually the whole thing :wink:
@@ -24,55 +24,55 @@ every redstone pulse do
     -- Water to Electrolytic Separator for making oxygen and hydrogen
     --  machine should be set to "Dumping Excess" on both outputs
     input fluid:minecraft:water from sink
-    output fluid:minecraft:water to elec_separator top side
+    output fluid:minecraft:water to "Electrolytic Separator" top side
     forget
 
     -- Sulfur dust to Chemical Oxidizer. This makes Sulfur Dioxide
-    input sulfur_dust from sulfur_drawer
-    output sulfur_dust to sulfur_oxidizer top side
+    input sulfur_dust from "Input - Sulfur Dust"
+    output sulfur_dust to "Oxidizer - Sulfur" top side
     forget
 
     -- Take Sulfur Dioxide from the Oxidizers and give to infusers,
     --  one requirement for making Sulfur Trioxide
-    input gas:mekanism:sulfur_dioxide from sulfur_oxidizer north side
-    output gas:mekanism:sulfur_dioxide to trioxide_infuser north side
+    input gas:mekanism:sulfur_dioxide from "Oxidizer - Sulfur" north side
+    output gas:mekanism:sulfur_dioxide to "Infuser - Sulfur Trioxide" north side
     forget
 
     -- Take Oxygen from the Electrolytic Separators and give to infusers,
     --  second requirement for making Sulfur Trioxide
-    input gas:mekanism:oxygen from elec_separator north side
-    output gas:mekanism:oxygen to trioxide_infuser south side
+    input gas:mekanism:oxygen from "Electrolytic Separator" north side
+    output gas:mekanism:oxygen to "Infuser - Sulfur Trioxide" south side
     forget
 
     -- Take Sulfur Trioxide from those infusers and give to the next infusers,
     --- one requirement for making Sulfuric Acid
-    input gas:mekanism:sulfur_trioxide from trioxide_infuser east side
-    output gas:mekanism:sulfur_trioxide to acid_infuser south side
+    input gas:mekanism:sulfur_trioxide from "Infuser - Sulfur Trioxide" east side
+    output gas:mekanism:sulfur_trioxide to "Infuser - Sulfuric Acid" south side
     forget
 
     -- Water to Rotary Condenstrator for making Water Vapor.
     --  The Rotary Condenstrator should be set to "Decondenstrating" by
     --  pressing the "Toggle operation" button top-left
     input fluid:minecraft:water from sink
-    output fluid:minecraft:water to condenstrator south side
+    output fluid:minecraft:water to "Rotary Condenstrator" south side
     forget
 
     -- Take Water Vapor from Rotary Condenstrators and give to infusers,
     -- second requirement for making Sulfuric Acid
-    input gas:mekanism:water_vapor from condenstrator south side
-    output gas:mekanism:water_vapor to acid_infuser north side
+    input gas:mekanism:water_vapor from "Rotary Condenstrator" south side
+    output gas:mekanism:water_vapor to "Infuser - Sulfuric Acid" north side
     forget
 
     -- Take Sulfuric Acid from infusers and give to Chemical Dissolution Chamber,
     --  one requirement for making Hydrofluoric Acid
-    input gas:mekanism:sulfuric_acid from acid_infuser east side
-    output gas:mekanism:sulfuric_acid to each dissolution top side
+    input gas:mekanism:sulfuric_acid from "Infuser - Sulfuric Acid" east side
+    output gas:mekanism:sulfuric_acid to each "Dissolution Chamber" top side
     forget
 
     -- Fluorite Blocks to Chemical Dissolution Chamber,
     --  second requirement for making Hydrofluoric Acid
-    input block_fluorite from fluorite_drawer
-    output block_fluorite to dissolution top side
+    input block_fluorite from "Input - Fluorite Block"
+    output block_fluorite to "Dissolution Chamber" top side
     forget
     
 
@@ -80,14 +80,14 @@ every redstone pulse do
 
     -- Uranium Ingots to Enrichment Chambers for making Yellow Cake Uranium,
     --  best would be Ultimate Enriching Factories with "Auto-sort" enabled :D
-    input uranium_ingot from uranium_drawer
-    output uranium_ingot to enrichment top side
+    input uranium_ingot from "Input - Uranium Ingot"
+    output uranium_ingot to "Enrichment Chamber" top side
     forget
 
     -- Take Yellow Cake Uranium from enrichment chambers and give to Chemical Oxidizers,
     --  making Uranium Oxide. You'll probably want quite a bit of these machines.
-    input yellow_cake_uranium from enrichment north side
-    output yellow_cake_uranium to uranium_oxidizer top side
+    input yellow_cake_uranium from "Enrichment Chamber" north side
+    output yellow_cake_uranium to "Oxidizer - Yellow Cake Uranium" top side
     forget
 
 
@@ -95,27 +95,27 @@ every redstone pulse do
 
     -- Take Hydrofluoric Acid from the Dissolution Chambers and give to Chemical Infuser,
     --  one requirement for making Uranium Hexafluoride
-    input gas:mekanism:hydrofluoric_acid from dissolution north side
-    output gas:mekanism:hydrofluoric_acid to uranium_infuser south side
+    input gas:mekanism:hydrofluoric_acid from "Dissolution Chamber" north side
+    output gas:mekanism:hydrofluoric_acid to "Infuser - Uranium Hexafluoride" south side
     forget
 
     -- Take Uranium Oxide from the Oxidizers and give to Chemical Infuser,
     --  second requirement for making uranioum Hexafluoride
-    input gas:mekanism:uranium_oxide from uranium_oxidizer north side
-    output gas:mekanism:uranium_oxide to uranium_infuser north side
+    input gas:mekanism:uranium_oxide from "Oxidizer - Yellow Cake Uranium" north side
+    output gas:mekanism:uranium_oxide to "Infuser - Uranium Hexafluoride" north side
     forget
 
 
     ---- Fissile Fuel ----
 
     -- Take Uranium Hecafluoride from Chemical Infusers and give to Isotopic Centrifuges
-    input gas:mekanism:uranium_hexafluoride from uranium_infuser east side
-    output gas:mekanism:uranium_hexafluoride to each centrifuge north side
+    input gas:mekanism:uranium_hexafluoride from "Infuser - Uranium Hexafluoride" east side
+    output gas:mekanism:uranium_hexafluoride to each "Isotopic Centrifuge" north side
     forget
 
     -- Take Fissile Fuel from Isotopic Centrifuges and send to output.
     --  You probably want the output to be a Fission Reactor Port on your reactor.
-    input gas:mekanism:fissile_fuel from centrifuge east side
+    input gas:mekanism:fissile_fuel from "Isotopic Centrifuge" east side
     output gas:mekanism:fissile_fuel to out north side
     forget
 end
